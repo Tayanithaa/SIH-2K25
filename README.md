@@ -44,7 +44,7 @@ pip install -r requirements.txt
 python start_server.py
 ```
 
-Backend will be available at: `http://localhost:8000`
+Backend will be available at: `http://localhost:8000`  
 API docs at: `http://localhost:8000/docs`
 
 ### 3. Frontend Setup
@@ -75,11 +75,11 @@ On first run, a default admin user is created:
 
 The system has three user roles with different access levels:
 
-| Role | Accessible Pages |
-|------|-----------------|
+| Role      | Accessible Pages                                                                                       |
+|-----------|-------------------------------------------------------------------------------------------------------|
 | **Admin** | Dashboard, Register Person, Registered Persons, MDR Management, Alerts, Unknown Persons, AI Monitoring, User Management |
-| **EHR User** | Dashboard, Registered Persons, MDR Management, Alerts |
-| **Officer** | Dashboard, Register Person, Registered Persons, Unknown Persons, AI Monitoring |
+| **EHR User** | Dashboard, Registered Persons, MDR Management, Alerts                                             |
+| **Officer**  | Dashboard, Register Person, Registered Persons, Unknown Persons, AI Monitoring                      |
 
 Only administrators can create, edit, or delete user accounts.
 
@@ -177,7 +177,6 @@ FACE_RECOGNITION_THRESHOLD=0.35
 python src/register_face.py register "Person Name"
 ```
 
-
 - The script runs a single continuous session collecting 50 samples by default
 - **Click the video preview or press `Enter`** to capture each sample manually
 - The person can put on or remove their mask at any time during the session—there's no forced phase separation
@@ -190,7 +189,7 @@ Set `FACE_REG_USE_GPU=true` in `.env` for GPU acceleration. Adjust `--total-samp
 Remove a registered identity from the database:
 
 ```powershell
-C:/Users/mourish/Desktop/sih_01/venv/Scripts/python.exe src/register_face.py unregister "Person Name"
+python src/register_face.py unregister "Person Name"
 ```
 
 This deletes all embeddings for that person from `data/face_database.json`.
@@ -201,16 +200,16 @@ Designate patients as MDR (Multi-Drug Resistant) to trigger email alerts when th
 
 ```powershell
 # Mark a patient as MDR
-C:/Users/mourish/Desktop/sih_01/venv/Scripts/python.exe src/mark_mdr.py mark "Patient Name"
+python src/mark_mdr.py mark "Patient Name"
 
 # Remove MDR status
-C:/Users/mourish/Desktop/sih_01/venv/Scripts/python.exe src/mark_mdr.py unmark "Patient Name"
+python src/mark_mdr.py unmark "Patient Name"
 
 # List all MDR patients
-C:/Users/mourish/Desktop/sih_01/venv/Scripts/python.exe src/mark_mdr.py list
+python src/mark_mdr.py list
 
 # Check if a patient is MDR
-C:/Users/mourish/Desktop/sih_01/venv/Scripts/python.exe src/mark_mdr.py check "Patient Name"
+python src/mark_mdr.py check "Patient Name"
 ```
 
 **MDR Email Alerts:**
@@ -238,7 +237,7 @@ For Gmail, you need to create an [App Password](https://support.google.com/accou
 Run the dual-camera monitoring system with integrated face recognition, person tracking, and collision detection:
 
 ```powershell
-C:/Users/mourish/Desktop/sih_01/venv/Scripts/python.exe src/monitor_contacts.py
+python src/monitor_contacts.py
 ```
 
 The monitor pairs a front view camera (laptop) with a side view camera (external) or two video files to confirm close contacts when *both* perspectives show overlapping person boxes.
@@ -270,11 +269,11 @@ R_new = R_old + (BaseRate × MaskModifier × Δt) + EventPenalty
 - Mask detection uses a trained classifier on the Kaggle face-mask-detection dataset
 
 **Risk Levels:**
-| Level | Risk Percentage | Color |
-|-------|----------------|-------|
-| Low | 0% - 39% | Green |
-| Medium | 40% - 69% | Orange |
-| High | 70% - 100% | Red |
+| Level  | Risk Percentage | Color  |
+|--------|----------------|--------|
+| Low    | 0% - 39%       | Green  |
+| Medium | 40% - 69%      | Orange |
+| High   | 70% - 100%     | Red    |
 
 **Collision Detection + Alerts:**
 - Measures IoU (Intersection over Union) + center-to-center distance for each pair
